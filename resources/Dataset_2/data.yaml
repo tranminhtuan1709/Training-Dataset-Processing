@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['-', '1']
+
+roboflow:
+  workspace: fracturedetection-qohz3
+  project: human-bone-fracture-detection
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/fracturedetection-qohz3/human-bone-fracture-detection/dataset/1
