@@ -55,6 +55,16 @@ def visualize(image_path: str, label_path: str) -> None:
 
 
 def reformat_labels(label_path: str) -> None:
+    '''
+        Reformat a label file to fit input format of model YOLO_v8.
+
+        Args:
+            label_path (str): path to a label file.
+        
+        Returns:
+            None
+    '''
+
     with open(label_path, 'r') as file:
         lines = file.readlines()
     
@@ -68,11 +78,21 @@ def reformat_labels(label_path: str) -> None:
     for line in lines:
         result = result + '0 ' + line
     
-    with open('resources/result_1.txt', 'a') as result_file:
-        result_file.write(result)
+    with open(label_path, 'w') as result_file:
+        result_file.write(result[:-1])
 
 
 def scan_label_files(folder_path: str) -> None:
+    '''
+        Reformat all label files in a folder.
+
+        Args:
+            folder_path (str): path to a folder.
+        
+        Returns:
+            None
+    '''
+
     all_label_files = glob.glob(os.path.join(folder_path, '*.txt'))
 
     for file in all_label_files:
@@ -80,7 +100,6 @@ def scan_label_files(folder_path: str) -> None:
         print(file)
 
 
-image_path = 'resources/Dataset_2/train/images/2b_png.rf.bd386bc20daa5a421597aef4b1a14c22.jpg'
-label_path = 'resources/Dataset_2/train/labels/2b_png.rf.bd386bc20daa5a421597aef4b1a14c22.txt'
-#visualize(image_path=image_path, label_path=label_path)
-scan_label_files('resources/Dataset_2/train/labels/')
+scan_label_files('resources/Dataset/train/labels/')
+scan_label_files('resources/Dataset/test/labels/')
+scan_label_files('resources/Dataset/valid/labels/')
